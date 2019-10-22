@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-/**
- * @author qp
- * @date 2019/7/21 17:10
- */
 @Controller
 @RequestMapping("/user")
 public class UserController {
