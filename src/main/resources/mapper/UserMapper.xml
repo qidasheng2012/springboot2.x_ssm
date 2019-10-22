@@ -3,7 +3,8 @@
 <mapper namespace="com.springboot.ssm.mapper.UserMapper">
 
     <select id="getAll" resultType="User">
-        SELECT *
+        SELECT
+            id,name,age
         FROM user
     </select>
 

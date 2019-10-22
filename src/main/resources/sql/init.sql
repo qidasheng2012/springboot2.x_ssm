@@ -9,3 +9,4 @@ CREATE TABLE `user`
 
 
 INSERT INTO `USER`VALUES (1, '张三', 23);
+INSERT INTO `USER`VALUES (2, '李四', 24);
