@@ -66,8 +66,13 @@ public class UserController {
         return "读取成功";
     }
 
+    @RequestMapping("/toUploadPage")
+    public String toUploadPage() {
+        return "user/upload";
+    }
+
     // easyexcel上传文件
-    @PostMapping("upload")
+    @PostMapping("/upload")
     @ResponseBody
     public String upload(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), User.class, new UserDataListener(userService)).sheet().doRead();
