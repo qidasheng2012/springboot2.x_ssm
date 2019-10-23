@@ -4,8 +4,20 @@
 
     <select id="getAll" resultType="User">
         SELECT
-            id,name,age
+            id,
+            name,
+            age,
+            birthday
         FROM user
     </select>
+
+
+    <insert id="saveBatch">
+        insert into user (name,age,birthday)
+        values
+        <foreach collection="list" separator="," item="user">
+            (#{user.name},#{user.age},#{user.birthday})
+        </foreach>
+    </insert>
 
 </mapper>
