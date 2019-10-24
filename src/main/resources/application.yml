@@ -22,3 +22,7 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
   #起别名。可省略写mybatis的xml中的resultType的全路径
   type-aliases-package: com.springboot.ssm.domain
+
+# Excel存放位置
+excel:
+  path: D://

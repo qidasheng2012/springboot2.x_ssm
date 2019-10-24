@@ -8,11 +8,9 @@ import com.springboot.ssm.service.UserService;
 import com.springboot.ssm.util.ExcelUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +21,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+    // 在application.yml中配置
+    @Value("${excel.path}")
+    private String path;
 
     @Autowired
     private UserService userService;
@@ -39,33 +41,47 @@ public class UserController {
         return userService.getAll();
     }
 
-    // easyexcel导出到指定位置Excel
-    @GetMapping("/export4File")
+    // easyexcel导出Excel到指定位置
+    @GetMapping("/export2File")
     @ResponseBody
-    public String export4File() {
-        ExcelUtils.export4File("D://", "用户表file", "用户信息file", User.class, userService.getAll());
+    public String export2File() {
+        ExcelUtils.export2File(path, "用户表", "用户信息", User.class, userService.getAll());
         return "导出成功";
     }
 
     // easyexcel导出Excel到web
-    @GetMapping("/export4Web")
-    public void export4Web(HttpServletResponse response) {
+    @GetMapping("/export2Web")
+    public void export2Web(HttpServletResponse response) {
         try {
-            ExcelUtils.export4Web(response, "用户表web", "用户信息web", User.class, userService.getAll());
+            ExcelUtils.export2Web(response, "用户表", "用户信息", User.class, userService.getAll());
         } catch (Exception e) {
-            log.error("报表导出失败:", e);
+            log.error("报表导出异常:", e);
         }
+    }
+
+    // 将指定位置指定名称的Excel导出到web
+    @GetMapping("/export2Web4File/{excelName}")
+    @ResponseBody
+    public String export2Web4File(HttpServletResponse response, @PathVariable String excelName) {
+        try {
+            return ExcelUtils.export2Web4File(response, path, excelName);
+        } catch (Exception e) {
+            log.error("文件导出异常：", e);
+        }
+
+        return "文件导出失败";
     }
 
     // easyexcel读取文件
     @GetMapping("/read4File")
     @ResponseBody
     public String read4File() {
-        String fileName = "d://用户表导入.xlsx";
+        String fileName = path + "用户表导入.xlsx";
         EasyExcel.read(fileName, User.class, new UserDataListener(userService)).sheet().doRead();
         return "读取成功";
     }
 
+    // 跳转到上传页面
     @RequestMapping("/toUploadPage")
     public String toUploadPage() {
         return "user/upload";
