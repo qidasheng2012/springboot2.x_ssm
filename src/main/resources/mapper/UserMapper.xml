@@ -6,18 +6,8 @@
         SELECT
             id,
             name,
-            age,
-            birthday
+            age
         FROM user
     </select>
-
-
-    <insert id="saveBatch">
-        insert into user (name,age,birthday)
-        values
-        <foreach collection="list" separator="," item="user">
-            (#{user.name},#{user.age},#{user.birthday})
-        </foreach>
-    </insert>
 
 </mapper>

@@ -1,8 +1,7 @@
 #服务器配置
 server:
   port: 8080
-  tomcat:
-    uri-encoding: utf-8
+
 
 spring:
   #数据源
@@ -23,6 +22,7 @@ mybatis:
   #起别名。可省略写mybatis的xml中的resultType的全路径
   type-aliases-package: com.springboot.ssm.domain
 
-# Excel存放位置
-excel:
-  path: D://
+# 日志
+logging:
+  level:
+    com.springboot.ssm.mapper: debug # 显示执行sql
