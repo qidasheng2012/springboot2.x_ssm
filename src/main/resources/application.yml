@@ -22,6 +22,12 @@ mybatis:
   #起别名。可省略写mybatis的xml中的resultType的全路径
   type-aliases-package: com.springboot.ssm.domain
 
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql
+
 # 日志
 logging:
   level:

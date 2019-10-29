@@ -1,12 +1,12 @@
 package com.springboot.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.springboot.ssm.domain.User;
 import com.springboot.ssm.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,10 +23,15 @@ public class UserController {
         return "user/userList";
     }
 
-    @RequestMapping("/getAll")
+    @GetMapping("/getAll")
     @ResponseBody
-    public List<User> getAll(User user) {
+    public List<User> getAll() {
         return userService.getAll();
     }
 
+    @GetMapping("/page")
+    @ResponseBody
+    public PageInfo<User> page(User user, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
+        return userService.page(user, pageNum, pageSize);
+    }
 }

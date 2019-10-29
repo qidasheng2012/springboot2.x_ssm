@@ -10,4 +10,19 @@
         FROM user
     </select>
 
+    <select id="getUsers" resultType="User" parameterType="User">
+        SELECT
+            id,
+            name,
+            age
+        FROM user
+        <where>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+        </where>
+    </select>
 </mapper>
