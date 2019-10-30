@@ -25,7 +25,7 @@ public class UserController {
 
     @RequestMapping("/getAll")
     @ResponseBody
-    public List<User> getAll(User user) {
+    public List<User> getAll() {
         return userService.getAll();
     }
 
