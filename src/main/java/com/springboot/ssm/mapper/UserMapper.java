@@ -1,10 +1,8 @@
 package com.springboot.ssm.mapper;
 
 import com.springboot.ssm.domain.User;
+import tk.mybatis.mapper.common.Mapper;
 
-import java.util.List;
+public interface UserMapper extends Mapper<User> {
 
-public interface UserMapper {
-    // 查询所有用户信息
-    List<User> getAll();
 }
