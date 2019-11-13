@@ -19,4 +19,14 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectAll();
     }
 
+    @Override
+    public List<User> selectByIds(String ids) {
+        return userMapper.selectByIds(ids);
+    }
+
+    @Override
+    public int addOne(User user) {
+        return userMapper.insertUseGeneratedKeys(user);
+    }
+
 }

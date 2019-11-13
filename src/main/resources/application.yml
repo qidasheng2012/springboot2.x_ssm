@@ -9,6 +9,11 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
   #起别名。可省略写mybatis的xml中的resultType的全路径
   type-aliases-package: com.springboot.ssm.domain
+mapper:
+  # 配置后会自动处理关键字，可以配的值和数据库有关。
+  wrap-keyword: '`{0}`'
+  # insertSelective 和 updateByPrimaryKeySelective 中，是否判断字符串类型 !=''。
+  notEmpty: true
 
 # 日志
 logging:
