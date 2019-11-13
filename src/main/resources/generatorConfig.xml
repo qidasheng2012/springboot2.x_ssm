@@ -1,0 +1,48 @@
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!--beginningDelimiter 和 endingDelimiter 开始和结束分隔符，对于有关键字的情况下适用。-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <!--业务Mapper继承自定义MysqlBaseMapper-->
+            <property name="mappers" value="com.springboot.ssm.common.mapper.MysqlBaseMapper"/>
+            <!--caseSensitive 是否区分大小写，默认值 false。如果数据库区分大小写，这里就需要配置为 true，这样当表名为 USER 时，会生成 @Table(name = "USER") 注解，否则使用小写 user 时会找不到表-->
+            <property name="caseSensitive" value="true"/>
+            <!--forceAnnotation 是否强制生成注解，默认 false，如果设置为 true，不管数据库名和字段名是否一致，都会生成注解（包含 @Table 和 @Column）-->
+            <property name="forceAnnotation" value="true"/>
+            <!--lombok 增加 model 代码生成时，可以直接生成 lombok 的注解-->
+            <property name="lombok" value="Data,Accessors"/>
+        </plugin>
+
+        <!--配置数据库-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/ssm?serverTimezone=Asia/Shanghai"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <!--生成的model配置-->
+        <javaModelGenerator targetPackage="com.springboot.ssm.domain"
+                            targetProject="src/main/java"/>
+
+        <!--生成的xxMapper.xml配置-->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src/main/resources"/>
+
+        <!--生成的xxMapper接口配置-->
+        <javaClientGenerator targetPackage="com.springboot.ssm.mapper"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <!--设置表名-->
+        <table tableName="teacher">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+    </context>
+</generatorConfiguration>
