@@ -1,4 +1,4 @@
-package com.springboot.ssm.mapper;
+package com.springboot.ssm.mapper.system;
 
 import com.springboot.ssm.domain.User;
 

@@ -1,7 +1,7 @@
 package com.springboot.ssm.service.impl;
 
 import com.springboot.ssm.domain.User;
-import com.springboot.ssm.mapper.UserMapper;
+import com.springboot.ssm.mapper.system.UserMapper;
 import com.springboot.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

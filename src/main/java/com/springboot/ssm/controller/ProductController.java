@@ -1,8 +1,7 @@
 package com.springboot.ssm.controller;
 
-import com.springboot.ssm.domain.User;
-import com.springboot.ssm.service.UserService;
-import lombok.extern.slf4j.Slf4j;
+import com.springboot.ssm.domain.Product;
+import com.springboot.ssm.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,17 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Slf4j
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/product")
+public class ProductController {
 
     @Autowired
-    private UserService userService;
+    private ProductService productService;
 
     @GetMapping("/getAll")
-    public List<User> getAll() {
-        return userService.getAll();
+    public List<Product> getAll() {
+        return productService.getAll();
     }
-
 }
