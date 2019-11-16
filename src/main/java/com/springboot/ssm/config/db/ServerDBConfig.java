@@ -31,7 +31,7 @@ public class ServerDBConfig {
     public DataSource serverDataSource() {
         return serverDataSourceProperties()
                 .initializeDataSourceBuilder()
-                .type(HikariDataSource.class) // 3. 可以显示指定连接池，也可以不显示指定；即此行代码可以注释掉
+                .type(HikariDataSource.class) // 可以显示指定连接池，也可以不显示指定；即此行代码可以注释掉
                 .build();
     }
 
@@ -41,8 +41,8 @@ public class ServerDBConfig {
         factoryBean.setDataSource(serverDataSource());
         factoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver()
-                        .getResources("classpath:mapper/server/*.xml")); // 2. xml 所在路径
-        factoryBean.setTypeAliasesPackage("com.springboot.ssm.domain");
+                        .getResources("classpath:mapper/server/*.xml")); // xml 所在路径
+        factoryBean.setTypeAliasesPackage("com.springboot.ssm.domain"); // 设置扫描别名包路径
         return factoryBean.getObject();
     }
 

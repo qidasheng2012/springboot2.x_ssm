@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @MapperScan(
-        basePackages = {"com.springboot.ssm.mapper.system"}, // 1. 扫描mapper层所在的包
+        basePackages = {"com.springboot.ssm.mapper.system"}, // 扫描mapper层所在的包
         sqlSessionTemplateRef = "systemSqlSessionTemplate")
 public class SystemDBConfig {
 
@@ -34,7 +34,7 @@ public class SystemDBConfig {
     public DataSource systemDataSource() {
         return systemDataSourceProperties()
                 .initializeDataSourceBuilder()
-                .type(HikariDataSource.class) // 3. 可以显示指定连接池，也可以不显示指定；即此行代码可以注释掉
+                .type(HikariDataSource.class) // 可以显示指定连接池，也可以不显示指定；即此行代码可以注释掉
                 .build();
     }
 
@@ -45,8 +45,8 @@ public class SystemDBConfig {
         factoryBean.setDataSource(systemDataSource());
         factoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver()
-                        .getResources("classpath:mapper/system/*.xml")); // 2. xml 所在路径
-        factoryBean.setTypeAliasesPackage("com.springboot.ssm.domain");
+                        .getResources("classpath:mapper/system/*.xml")); // xml 所在路径
+        factoryBean.setTypeAliasesPackage("com.springboot.ssm.domain"); // 设置扫描别名包路径
         return factoryBean.getObject();
     }
 
