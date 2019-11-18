@@ -1,10 +1,8 @@
 package com.springboot.ssm.mapper.server;
 
+import com.springboot.ssm.common.mapper.MysqlBaseMapper;
 import com.springboot.ssm.domain.Product;
 
-import java.util.List;
+public interface ProductMapper extends MysqlBaseMapper<Product> {
 
-public interface ProductMapper {
-    // 查询所有产品信息
-    List<Product> getAll();
 }
