@@ -1,15 +1,13 @@
-package com.springboot.ssm.domain;
+package com.springboot.ssm.common;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-@TableName("user")
-public class User {
+public class BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private String name;
-    private Integer age;
 }
