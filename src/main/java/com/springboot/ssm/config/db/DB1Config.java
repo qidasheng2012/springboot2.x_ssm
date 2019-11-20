@@ -18,21 +18,21 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(
         basePackages = {"com.springboot.ssm.mapper.system"}, // 扫描mapper层所在的包
-        sqlSessionTemplateRef = "systemSqlSessionTemplate")
-public class SystemDBConfig {
+        sqlSessionTemplateRef = "db1SqlSessionTemplate")
+public class DB1Config {
 
     @Bean
     @Primary
-    @ConfigurationProperties("spring.datasource.system")
-    public DataSourceProperties systemDataSourceProperties() {
+    @ConfigurationProperties(prefix = "spring.datasource.system")
+    public DataSourceProperties db1DataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Bean
     @Primary
-    @ConfigurationProperties("spring.datasource.system.configuration")
-    public DataSource systemDataSource() {
-        return systemDataSourceProperties()
+    @ConfigurationProperties(prefix = "spring.datasource.system.configuration")
+    public DataSource db1DataSource() {
+        return db1DataSourceProperties()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class) // 可以显示指定连接池，也可以不显示指定；即此行代码可以注释掉
                 .build();
@@ -40,9 +40,9 @@ public class SystemDBConfig {
 
     @Bean
     @Primary
-    public SqlSessionFactory systemSqlSessionFactory() throws Exception {
+    public SqlSessionFactory db1SqlSessionFactory() throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-        factoryBean.setDataSource(systemDataSource());
+        factoryBean.setDataSource(db1DataSource());
         factoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver()
                         .getResources("classpath:mapper/system/*.xml")); // xml 所在路径
@@ -52,14 +52,14 @@ public class SystemDBConfig {
 
     @Bean
     @Primary
-    public DataSourceTransactionManager systemTransactionManager() {
-        return new DataSourceTransactionManager(systemDataSource());
+    public DataSourceTransactionManager db1TransactionManager() {
+        return new DataSourceTransactionManager(db1DataSource());
     }
 
     @Bean
     @Primary
-    public SqlSessionTemplate systemSqlSessionTemplate() throws Exception {
-        return new SqlSessionTemplate(systemSqlSessionFactory());
+    public SqlSessionTemplate db1SqlSessionTemplate() throws Exception {
+        return new SqlSessionTemplate(db1SqlSessionFactory());
     }
 
 }

@@ -17,28 +17,28 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(
         basePackages = {"com.springboot.ssm.mapper.server"}, // 1. 扫描mapper层所在的包
-        sqlSessionTemplateRef = "serverSqlSessionTemplate")
-public class ServerDBConfig {
+        sqlSessionTemplateRef = "db2SqlSessionTemplate")
+public class DB2Config {
 
     @Bean
-    @ConfigurationProperties("spring.datasource.server")
-    public DataSourceProperties serverDataSourceProperties() {
+    @ConfigurationProperties(prefix = "spring.datasource.server")
+    public DataSourceProperties db2DataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Bean
-    @ConfigurationProperties("spring.datasource.server.configuration")
-    public DataSource serverDataSource() {
-        return serverDataSourceProperties()
+    @ConfigurationProperties(prefix = "spring.datasource.server.configuration")
+    public DataSource db2DataSource() {
+        return db2DataSourceProperties()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class) // 可以显示指定连接池，也可以不显示指定；即此行代码可以注释掉
                 .build();
     }
 
     @Bean
-    public SqlSessionFactory serverSqlSessionFactory() throws Exception {
+    public SqlSessionFactory db2SqlSessionFactory() throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-        factoryBean.setDataSource(serverDataSource());
+        factoryBean.setDataSource(db2DataSource());
         factoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver()
                         .getResources("classpath:mapper/server/*.xml")); // xml 所在路径
@@ -47,13 +47,13 @@ public class ServerDBConfig {
     }
 
     @Bean
-    public DataSourceTransactionManager serverTransactionManager() {
-        return new DataSourceTransactionManager(serverDataSource());
+    public DataSourceTransactionManager db2TransactionManager() {
+        return new DataSourceTransactionManager(db2DataSource());
     }
 
     @Bean
-    public SqlSessionTemplate serverSqlSessionTemplate() throws Exception {
-        return new SqlSessionTemplate(serverSqlSessionFactory());
+    public SqlSessionTemplate db2SqlSessionTemplate() throws Exception {
+        return new SqlSessionTemplate(db2SqlSessionFactory());
     }
 
 }
