@@ -1,10 +1,8 @@
 package com.springboot.ssm.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.springboot.ssm.domain.User;
 
-import java.util.List;
+public interface UserMapper extends BaseMapper<User> {
 
-public interface UserMapper {
-    // 查询所有用户信息
-    List<User> getAll();
 }

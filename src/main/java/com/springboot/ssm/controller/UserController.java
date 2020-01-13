@@ -1,12 +1,12 @@
 package com.springboot.ssm.controller;
 
+import com.springboot.ssm.aspect.OperationLogAble;
 import com.springboot.ssm.domain.User;
 import com.springboot.ssm.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,10 +23,19 @@ public class UserController {
         return "user/userList";
     }
 
-    @RequestMapping("/getAll")
+    @GetMapping("/list")
     @ResponseBody
-    public List<User> getAll() {
-        return userService.getAll();
+    public List<User> list() {
+        return userService.list();
+    }
+
+    @PostMapping("/save")
+    @ResponseBody
+    @OperationLogAble(resource = "user")
+    public String save(@RequestBody User user) {
+        boolean status = userService.save(user);
+
+        return status ? "成功" : "失败";
     }
 
 }
