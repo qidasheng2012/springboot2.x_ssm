@@ -1,7 +1,6 @@
 package com.springboot.ssm.controller;
 
 import com.alibaba.excel.EasyExcel;
-import com.springboot.ssm.annotation.LogAnnotation;
 import com.springboot.ssm.domain.User;
 import com.springboot.ssm.listener.UserDataListener;
 import com.springboot.ssm.service.UserService;
@@ -34,7 +33,6 @@ public class UserController {
         return "user/userList";
     }
 
-    @LogAnnotation(description = "获取所有用户信息", clazz = User.class)
     @RequestMapping("/getAll")
     @ResponseBody
     public List<User> getAll(User user) {
