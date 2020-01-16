@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.springboot.ssm.domain.User;
 import com.springboot.ssm.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,9 @@ public class UserDataListener extends AnalysisEventListener<User> {
      */
     private void saveData() {
         log.info("{}条数据，开始存储数据库！", list.size());
-        userService.saveBatch(list);
+        if (!CollectionUtils.isEmpty(list)) {
+            userService.saveBatch(list);
+        }
         log.info("存储数据库成功！");
     }
 }
