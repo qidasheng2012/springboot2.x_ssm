@@ -5,8 +5,11 @@ import com.springboot.ssm.domain.User;
 import com.springboot.ssm.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class UserController {
 
     @GetMapping("/page")
     @ResponseBody
-    public PageInfo<User> page(User user, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
-        return userService.page(user, pageNum, pageSize);
+    public PageInfo<User> page(User user, Pageable pageable) {
+        return userService.page(user, pageable);
     }
 }
